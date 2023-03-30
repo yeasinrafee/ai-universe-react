@@ -1,10 +1,13 @@
 import React from "react";
+import Header from "./components/Header/Header";
+import Button from "./components/Button/Button";
 
 const App = () => {
   return (
-    <div>
-      <button className="btn btn-link">Button</button>
-    </div>
+    <>
+      <Header />
+      <Button>Sort By Date</Button>
+    </>
   );
 };
 
