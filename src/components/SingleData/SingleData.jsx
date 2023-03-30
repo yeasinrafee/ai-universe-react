@@ -1,8 +1,8 @@
 import React from "react";
 
-const SingleData = ({ singleData }) => {
-  console.log(singleData);
-  const { description, features, image, name, published_in } = singleData;
+const SingleData = (props) => {
+  console.log(props.singleData);
+  const { id, features, image, name, published_in } = props.singleData;
   return (
     <div>
       <div className="card w-full bg-base-100 shadow-2xl">
@@ -12,7 +12,7 @@ const SingleData = ({ singleData }) => {
         <div className="card-body">
           <h2 className="card-title font-bold">Features</h2>
           {features.map((feature, index) => (
-            <p>
+            <p key={index}>
               {index + 1}. {feature}
             </p>
           ))}
@@ -39,7 +39,11 @@ const SingleData = ({ singleData }) => {
               <p>{published_in}</p>
             </div>
             <div>
-              <span className="cursor-pointer">
+              <label
+                onClick={() => props.setUniqueId(id)}
+                htmlFor="my-modal-5"
+                className="cursor-pointer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -54,12 +58,9 @@ const SingleData = ({ singleData }) => {
                     d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                   />
                 </svg>
-              </span>
+              </label>
             </div>
           </div>
-          {/* <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div> */}
         </div>
       </div>
     </div>

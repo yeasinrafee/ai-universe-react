@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Card from "../SingleData/SingleData";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
 const Cards = () => {
   const [data, setData] = useState([]);
+  const [singleData, setSingleData] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [uniqueId, setUniqueId] = useState(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -20,11 +23,21 @@ const Cards = () => {
     setShowAll(true);
   };
 
+  useEffect(() => {
+    fetch(`https://openapi.programming-hero.com/api/ai/tool/${uniqueId}`)
+      .then((res) => res.json())
+      .then((data) => setSingleData(data.data));
+  }, [uniqueId]);
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:px-12 my-6">
         {data.slice(0, showAll ? 12 : 6).map((singleData) => (
-          <Card singleData={singleData} key={singleData.id} />
+          <Card
+            singleData={singleData}
+            key={singleData.id}
+            setUniqueId={setUniqueId}
+          />
         ))}
       </div>
       {!showAll && (
@@ -32,6 +45,7 @@ const Cards = () => {
           <Button>See More</Button>
         </span>
       )}
+      <Modal singleData={singleData} />
     </>
   );
 };
