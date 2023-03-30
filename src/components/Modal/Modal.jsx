@@ -1,11 +1,7 @@
 import React from "react";
 
 const Modal = (props) => {
-  console.log(props.singleData);
-  const { description, image_link, pricing, accuracy, integrations, features } =
-    props.singleData;
-
-  console.log(integrations);
+  const { description, image_link, integrations, features } = props.singleData;
   return (
     <>
       <input type="checkbox" id="my-modal-5" className="modal-toggle" />
@@ -43,7 +39,7 @@ const Modal = (props) => {
           </div>
           <div className="modal-action">
             <label htmlFor="my-modal-5" className="btn">
-              Yay!
+              Close
             </label>
           </div>
         </div>
